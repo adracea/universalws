@@ -22,7 +22,7 @@ RUN apt-get update && apt-get -y install \
 ARG NODE_VERSION=v16.14.2
 ARG MVN_VERSION=3.8.5
 
-ARG PYTHON_VERSION=3.10
+ARG PYTHON_VERSION=3.6
 ENV DISTRO 'jammy'
 ENV JAVA_INSTALL_VERSION jdk-18
 ENV JAVA_HOME       /opt/${JAVA_INSTALL_VERSION}
@@ -54,4 +54,5 @@ RUN apt-get clean && \
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x ./entrypoint.sh
+RUN alias python=python3
 ENTRYPOINT [ "/entrypoint.sh" ]
