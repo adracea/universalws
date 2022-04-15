@@ -24,7 +24,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt install -y so
 ARG MVN_VERSION=3.8.5
 
 ARG PYTHON_VERSION=3.10
-
+ENV DISTRO 'impish'
 RUN apt-get update
 ENV JAVA_INSTALL_VERSION openjdk-16
 ENV JAVA_HOME       /usr/lib/jvm/java-16-openjdk-amd64
