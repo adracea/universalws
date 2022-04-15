@@ -7,7 +7,7 @@ LABEL maintainer="Alex Dracea <adracea@gmail.com>"
 ENV LANGUAGE	      en_US.UTF-8
 ENV LANG    	      en_US.UTF-8
 ENV LC_ALL  	      en_US.UTF-8
-
+ENV DEBIAN_FRONTEND noninteractive
 ### Install wget, curl, git, unzip, gnupg, locales
 RUN apt-get update && apt-get -y install \
       curl \
@@ -20,7 +20,7 @@ RUN apt-get update && apt-get -y install \
     && locale-gen en_US.UTF-8
 
 ARG NODE_VERSION=v16.14.2
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt install -y software-properties-common
+RUN apt-get update
 ARG MVN_VERSION=3.8.5
 
 ARG PYTHON_VERSION=3.10
@@ -45,11 +45,9 @@ RUN curl -sSL https://install.python-poetry.org | python3 -
 ENV PATH apache-maven-$MVN_VERSION/bin:node-$NODE_VERSION-linux-x64/bin:$JAVA_HOME/bin:$PATH
 RUN npm i -g yarn
 RUN npm i -g bower
-# #clean up apt 
-# RUN apt-get clean && \
-# 	rm -rf /var/lib/apt/lists/* && \
-# 	rm -rf /tmp/*
-
+RUN apt-get clean && \
+	rm -rf /var/lib/apt/lists/* && \
+	rm -rf /tmp/*
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x ./entrypoint.sh
