@@ -37,7 +37,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Run Whitesource Action
-      uses: adracea/Universal-Whitesource-Scan-Action@v0.1
+      uses: adracea/universalws@v0.1
       with:
         wssUrl: https://app-eu.whitesourcesoftware.com/agent
         apiKey: ${{ secrets.WSS_API_KEY }}
@@ -64,7 +64,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Run Whitesource Action
-      uses: adracea/Universal-Whitesource-Scan-Action@v0.1
+      uses: adracea/universalws@v0.1
       with:
         wssUrl: https://app-eu.whitesourcesoftware.com/agent
         apiKey: ${{ secrets.WSS_API_KEY }}

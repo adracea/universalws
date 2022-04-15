@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 
 LABEL version="0.1.0"
-LABEL repository="https://github.com/adracea/Universal-Whitesource-Scan-Action"
+LABEL repository="https://github.com/adracea/universalws"
 LABEL maintainer="Alex Dracea <adracea@gmail.com>"
 
 ENV LANGUAGE	      en_US.UTF-8
@@ -19,10 +19,10 @@ RUN apt-get update && apt-get -y install \
       jq \
     && locale-gen en_US.UTF-8
 
-ENV NODE_VERSION=v16.14.2
+ARG NODE_VERSION=v16.14.2
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt install -y software-properties-common
 RUN add-apt-repository universe
-ENV MVN_VERSION=3.8.5
+ARG MVN_VERSION=3.8.5
 
 ARG PYTHON_VERSION=3.10
 
