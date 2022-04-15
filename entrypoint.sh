@@ -30,7 +30,7 @@ if [ -n "$INPUT_PRODUCTNAME" ]; then
   PRODUCT_NAME_STR="-product $INPUT_PRODUCTNAME"
 fi
 
-if [ "$INPUT_FAILBUILDONPOLICYVIOLATIONS" == "true" ]; then
+if [ "$INPUT_FAILONPOLICYVIOLATIONS" == "true" ]; then
   export WS_CHECKPOLICIES=true
   export WS_FORCECHECKALLDEPENDENCIES=true
   export WS_FORCEUPDATE=true
@@ -44,30 +44,24 @@ curl -LJO  https://github.com/whitesource/unified-agent-distribution/releases/la
 jarsigner -verify  wss-unified-agent.jar
 
 # Run additional commands if necessary
-if [ -n "$INPUT_EXTRACOMMANDSFILE" ]; then
-  echo "!!Executing file: $INPUT_EXTRACOMMANDSFILE !!"
-  chmod +x $INPUT_EXTRACOMMANDSFILE
-  ./$INPUT_EXTRACOMMANDSFILE
+if [ -n "$INPUT_PRERUNFILE" ]; then
+  echo "!!Executing file: $INPUT_PRERUNFILE !!"
+  chmod +x $INPUT_PRERUNFILE
+  ./$INPUT_PRERUNFILE
 fi
 
-#unset GOROOT passed automatically by setup-go
-unset GOROOT
 
 # don't exit if unified agent exits with error code
 set +e
-# Execute Unified Agent (2 settings)
-if [ -z  "$INPUT_CONFIGFILE" ]; then
+# Execute Unified Agent with or without config
+if [ -z  "$INPUT_AGENTCONFIG" ]; then
   java -jar wss-unified-agent.jar -noConfig true -apiKey $INPUT_APIKEY -project "$PROJECT_NAME_STR" $PRODUCT_NAME_STR\
     -d . -wss.url $INPUT_WSSURL -resolveAllDependencies true
 else
-  java -jar wss-unified-agent.jar -apiKey $INPUT_APIKEY -c "$INPUT_CONFIGFILE" -d .
+  java -jar wss-unified-agent.jar -apiKey $INPUT_APIKEY -c "$INPUT_AGENTCONFIG" -d .
 fi
 
 WS_EXIT_CODE=$?
 echo "WS exit code: $WS_EXIT_CODE"
-
-if [ -n "$WS_USERKEY" ] && [ "$WS_GENERATEPROJECTDETAILSJSON" == "true" ]; then
-  /list-project-alerts.sh
-fi
 
 exit $WS_EXIT_CODE
