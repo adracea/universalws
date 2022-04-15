@@ -32,7 +32,7 @@ ENV PATH 	    	    $JAVA_HOME/bin:$PATH
 RUN echo "deb http://ppa.launchpad.net/openjdk-r/ppa/ubuntu $DISTRO main" | tee /etc/apt/sources.list.d/ppa_openjdk-r.list && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys DA1A4A13543B466853BAF164EB9B1D8886F44E2A
 RUN apt-get update
-RUN apt-get -y install ${JAVA_INSTALL_VERSION}-jdk-headless python${PYTHON_VERSION} build-essential
+RUN apt-get -y install ${JAVA_INSTALL_VERSION}-jdk python${PYTHON_VERSION} build-essential
 
 RUN wget https://nodejs.org/dist/$NODE_VERSION/node-$NODE_VERSION-linux-x64.tar.xz && tar -xf node-$NODE_VERSION-linux-x64.tar.xz && cd node-$NODE_VERSION-linux-x64/bin && export PATH=$PATH:$(pwd) && cd
 RUN wget https://dlcdn.apache.org/maven/maven-3/${MVN_VERSION}/binaries/apache-maven-${MVN_VERSION}-bin.tar.gz && tar -xf apache-maven-${MVN_VERSION}-bin.tar.gz && ls && cd apache-maven-${MVN_VERSION}/bin && export PATH=$PATH:$(pwd) && cd
