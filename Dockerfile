@@ -21,7 +21,6 @@ RUN apt-get update && apt-get -y install \
 
 ARG NODE_VERSION=v16.14.2
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt install -y software-properties-common
-RUN add-apt-repository universe
 ARG MVN_VERSION=3.8.5
 
 ARG PYTHON_VERSION=3.10
@@ -30,8 +29,11 @@ RUN apt-get update
 ENV JAVA_INSTALL_VERSION openjdk-16
 ENV JAVA_HOME       /usr/lib/jvm/java-16-openjdk-amd64
 ENV PATH 	    	    $JAVA_HOME/bin:$PATH
-### Install Java openjdk 8
-RUN apt-get -y install ${JAVA_INSTALL_VERSION}-jre-headless ${JAVA_INSTALL_VERSION}-jdk-headless python${PYTHON_VERSION} build-essential
+### Install Java openjdk vers
+
+RUN echo "deb http://ppa.launchpad.net/openjdk-r/ppa/ubuntu $DISTRO main" | tee /etc/apt/sources.list.d/ppa_openjdk-r.list && \
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys DA1A4A13543B466853BAF164EB9B1D8886F44E2A
+RUN apt-get -y install ${JAVA_INSTALL_VERSION}-jdk-headless python${PYTHON_VERSION} build-essential
 
 RUN wget https://nodejs.org/dist/$NODE_VERSION/node-$NODE_VERSION-linux-x64.tar.xz && tar -xf node-$NODE_VERSION-linux-x64.tar.xz && cd node-$NODE_VERSION-linux-x64/bin && export PATH=$PATH:$(pwd) && cd
 RUN wget https://dlcdn.apache.org/maven/maven-3/${MVN_VERSION}/binaries/apache-maven-${MVN_VERSION}-bin.tar.gz && tar -xf apache-maven-${MVN_VERSION}-bin.tar.gz && ls && cd apache-maven-${MVN_VERSION}/bin && export PATH=$PATH:$(pwd) && cd
