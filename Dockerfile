@@ -20,7 +20,7 @@ RUN apt-get update && apt-get -y install \
     && locale-gen en_US.UTF-8
 
 ARG NODE_VERSION=v16.14.2
-ARG MVN_VERSION=3.8.5
+ARG MVN_VERSION=3.8.6
 
 ARG PYTHON_VERSION=3.6
 ENV DISTRO 'jammy'
