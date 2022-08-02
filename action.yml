@@ -1,4 +1,4 @@
-name: 'Whitesource Scan'
+name: 'ad-ws-scan-universal'
 author: 'Alexandru Dracea'
 description: 'Run a scan using the Whitesource unified agent with java,npm and python language support.'
 inputs:
