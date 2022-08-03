@@ -47,6 +47,7 @@ RUN pip install pipenv
 RUN curl -sSL https://install.python-poetry.org | python3 -
 ENV PATH apache-maven-$MVN_VERSION/bin:node-$NODE_VERSION-linux-x64/bin:$JAVA_HOME/bin:$PATH
 RUN npm i -g yarn
+RUN mvn -v
 RUN npm i -g bower
 RUN apt-get clean && \
 	rm -rf /var/lib/apt/lists/* && \
