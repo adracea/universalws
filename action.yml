@@ -17,7 +17,7 @@ inputs:
   agentConfig:
     description: 'Filename of whitesource agent configuration if being used (including file path)'
     required: false
-  inputPath:
+  path:
     description: 'Location of the application to be scanned'
     required: false
     default: .
