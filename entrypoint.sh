@@ -58,7 +58,7 @@ if [ -z  "$INPUT_AGENTCONFIG" ]; then
   java -jar wss-unified-agent.jar -noConfig true -apiKey $INPUT_APIKEY -project "$PROJECT_NAME_STR" $PRODUCT_NAME_STR\
     -d . -wss.url $INPUT_WSSURL -resolveAllDependencies true
 else
-  java -jar wss-unified-agent.jar -apiKey $INPUT_APIKEY -c "$INPUT_AGENTCONFIG" -d .
+  java -jar wss-unified-agent.jar -apiKey $INPUT_APIKEY -c "$INPUT_AGENTCONFIG" -d $INPUT_PATH
 fi
 
 WS_EXIT_CODE=$?
