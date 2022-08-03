@@ -30,7 +30,7 @@ inputs:
     default: 'false'
 runs:
   using: 'docker'
-  image: 'silent0ne/universalwss:latest'
+  image: 'docker://silent0ne/universalwss:latest'
 branding:
   icon: 'circle'
   color: 'green'
