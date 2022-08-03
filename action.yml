@@ -17,6 +17,10 @@ inputs:
   agentConfig:
     description: 'Filename of whitesource agent configuration if being used (including file path)'
     required: false
+  inputPath:
+    description: 'Location of the application to be scanned'
+    required: false
+    default: .
   preRunFile:
     description: 'Filename of a file/script to run before the scan begins.'
     required: false
@@ -26,7 +30,7 @@ inputs:
     default: 'false'
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'silent0ne/universalwss:v0.1.0-20220803.18'
 branding:
   icon: 'circle'
   color: 'green'
