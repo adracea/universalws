@@ -51,7 +51,8 @@ RUN mvn -v
 RUN npm i -g bower
 RUN apt-get clean && \
 	rm -rf /var/lib/apt/lists/* && \
-	rm -rf /tmp/*
+	rm -rf /tmp/* && \
+	rm *.tar.*
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x ./entrypoint.sh
